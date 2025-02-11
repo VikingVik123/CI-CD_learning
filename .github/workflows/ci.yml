@@ -1,7 +1,7 @@
 name: CI learning(FastAPI)
 
-
 on: [push, pull_request]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,6 +19,11 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
           pip install pytest black
+
+    - name: Verify Installation and Environment
+      run: |
+          source venv/bin/activate
+          pip freeze
 
     - name: Run Tests
       run: |
