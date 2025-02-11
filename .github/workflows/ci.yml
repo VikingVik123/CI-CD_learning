@@ -1,0 +1,31 @@
+name: CI learning(FastAPI)
+
+
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
+        - name: Install Dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+          pip install pytest black
+
+        - name: Run Tests
+        run: |
+          source venv/bin/activate
+          pytest
+
+      - name: Code Formatting Check
+        run: |
+          source venv/bin/activate
+          black --check .
